@@ -12,6 +12,7 @@ public class PersonaDTO {
 	private long idDomicilio;
 	private long idTipoDeContacto;
 	
+	
 	public PersonaDTO(long idPersona, String nombre, String telefono, String email, Date fechaDeNacimiento,
 			long idDomicilio, long idTipoDeContacto) {
 		super();
