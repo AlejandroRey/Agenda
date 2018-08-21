@@ -14,7 +14,8 @@
 
 -- Dumping database structure for agenda
 DROP DATABASE IF EXISTS `agenda`;
-CREATE DATABASE IF NOT EXISTS `agenda` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+-- CREATE DATABASE IF NOT EXISTS `agenda` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+CREATE DATABASE IF NOT EXISTS `agenda` DEFAULT CHARACTER SET utf8 ;
 USE `agenda`;
 
 -- Dumping structure for table agenda.domicilios
