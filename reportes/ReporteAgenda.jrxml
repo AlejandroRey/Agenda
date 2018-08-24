@@ -6,17 +6,20 @@
 	<queryString language="SQL">
 		<![CDATA[]]>
 	</queryString>
-	<field name="telefono" class="java.lang.String">
-		<fieldDescription><![CDATA[telefono]]></fieldDescription>
-	</field>
 	<field name="nombre" class="java.lang.String">
 		<fieldDescription><![CDATA[nombre]]></fieldDescription>
+	</field>
+	<field name="telefono" class="java.lang.String">
+		<fieldDescription><![CDATA[telefono]]></fieldDescription>
 	</field>
 	<field name="email" class="java.lang.String">
 		<fieldDescription><![CDATA[email]]></fieldDescription>
 	</field>
+	<field name="splitMailServer" class="java.lang.String">
+		<fieldDescription><![CDATA[splitMailServer]]></fieldDescription>
+	</field>
 	<group name="Mail Group">
-		<groupExpression><![CDATA[$F{nombre}]]></groupExpression>
+		<groupExpression><![CDATA[$F{splitMailServer}]]></groupExpression>
 		<groupHeader>
 			<band height="50">
 				<frame>
@@ -42,15 +45,15 @@
 						</textElement>
 						<text><![CDATA[Mail]]></text>
 					</staticText>
-					<textField>
-						<reportElement x="427" y="5" width="118" height="20" uuid="3357c500-e89f-4871-a805-067d8c8625e6"/>
-						<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
-					</textField>
 				</frame>
+				<textField>
+					<reportElement x="427" y="5" width="118" height="20" uuid="3357c500-e89f-4871-a805-067d8c8625e6"/>
+					<textFieldExpression><![CDATA[$F{splitMailServer}]]></textFieldExpression>
+				</textField>
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band/>
+			<band height="10"/>
 		</groupFooter>
 	</group>
 	<background>
@@ -93,18 +96,22 @@
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="24" splitType="Stretch">
+		<band height="26" splitType="Stretch">
 			<textField>
-				<reportElement x="5" y="0" width="177" height="18" uuid="4a345b01-b751-4529-b6d6-2ccf3c13ff66"/>
+				<reportElement x="5" y="2" width="177" height="18" uuid="4a345b01-b751-4529-b6d6-2ccf3c13ff66"/>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="188" y="1" width="150" height="18" uuid="dd3f7d4c-c2c3-4ee6-8d98-1b88fe0228ec"/>
+				<reportElement x="188" y="2" width="150" height="18" uuid="dd3f7d4c-c2c3-4ee6-8d98-1b88fe0228ec"/>
 				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="343" y="1" width="205" height="18" uuid="7a7d38e3-7e89-43ab-8d7d-c03e11ac7ffc"/>
+				<reportElement x="343" y="2" width="150" height="18" uuid="7a7d38e3-7e89-43ab-8d7d-c03e11ac7ffc"/>
 				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="501" y="2" width="50" height="18" uuid="a58edbfa-3971-4e5d-a630-d83ff8ea0c57"/>
+				<textFieldExpression><![CDATA[$F{splitMailServer}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

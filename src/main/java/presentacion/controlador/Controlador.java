@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,6 +16,7 @@ import javax.swing.JOptionPane;
 import dto.DomicilioDTO;
 import dto.LocalidadDTO;
 import dto.PersonaDTO;
+import dto.PersonaReporteDTO;
 import dto.TipoDeContactoDTO;
 import modelo.Agenda;
 import presentacion.reportes.ReporteAgenda;
@@ -224,8 +226,7 @@ public class Controlador implements ActionListener
 			}
 			
 		} else if (e.getSource() == this.vista.getBtnReporte()) {	
-			System.out.println("Reporte");
-			ReporteAgenda reporte = new ReporteAgenda(agenda.obtenerPersonasReporte());
+			ReporteAgenda reporte = new ReporteAgenda(obtenerPersonasReporte());
 			reporte.mostrar();			
 		} else if (e.getSource() == this.vista.getBtnCerrarAgenda()) {
 			this.vista.cerrarAgenda();
@@ -284,6 +285,16 @@ public class Controlador implements ActionListener
 			llenarTablaTipoDeContactos();
 		}
 
+	}
+
+	private Set<PersonaReporteDTO> obtenerPersonasReporte() {
+		Set<PersonaReporteDTO> personasReporte = agenda.obtenerPersonasReporte();
+		for (PersonaReporteDTO personaReporteDTO : personasReporte) {
+			String p = personaReporteDTO.getEmail();
+			String[] splitEmail = p.split("@");
+			personaReporteDTO.setSplitMailServer(splitEmail[1]);
+		}
+		return personasReporte;
 	}
 
 	private void editarPersona() {
