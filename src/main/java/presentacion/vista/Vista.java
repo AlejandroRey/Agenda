@@ -34,6 +34,7 @@ public class Vista {
 	private JButton btnEditar;
 	private JButton btnBorrarLocalidad;
 	private JButton btnBorrarTipoDeContacto;
+	private JButton btnReporte;
 	private JButton btnCerrarAgenda;
 	private DefaultTableModel modelPersonas;
 	private String[] nombreColumnas = {"Nombre y apellido", "Tel�fono", "Correo Electronico", "Fecha de Nacimiento", "Domicilio", "Tipo de Contacto" };
@@ -135,6 +136,10 @@ public class Vista {
 		btnCerrarAgenda = new JButton("Cerrar Agenda");
 		btnCerrarAgenda.setBounds(461, 726, 235, 23);
 		panel.add(btnCerrarAgenda);
+		
+		btnReporte = new JButton("Ver Reporte");
+		btnReporte.setBounds(461, 359, 235, 23);
+		panel.add(btnReporte);
 		
 		JLabel lblAgenda = new JLabel("AGENDA");
 		lblAgenda.setFont(new Font("Tahoma", Font.PLAIN, 35));
@@ -245,5 +250,9 @@ public class Vista {
 	
 	public String[] getNombreColumnaTipoDeContactos() {
 		return nombreDeColumnasTipoDeContactos;
+	}
+
+	public JButton getBtnReporte() {
+		return btnReporte;
 	}
 }

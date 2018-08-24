@@ -2,14 +2,6 @@ package presentacion.controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,16 +12,16 @@ import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 
+import dto.DomicilioDTO;
+import dto.LocalidadDTO;
+import dto.PersonaDTO;
+import dto.TipoDeContactoDTO;
 import modelo.Agenda;
 import presentacion.reportes.ReporteAgenda;
 import presentacion.vista.VentanaLocalidad;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.VentanaTipoDeContacto;
 import presentacion.vista.Vista;
-import dto.DomicilioDTO;
-import dto.LocalidadDTO;
-import dto.PersonaDTO;
-import dto.TipoDeContactoDTO;
 
 public class Controlador implements ActionListener
 {
@@ -53,6 +45,7 @@ public class Controlador implements ActionListener
 		this.vista.getBtnBorrarTipoDeContacto().addActionListener(this);
 		this.vista.getBtnEditarLocalidad().addActionListener(this);
 		this.vista.getBtnEditarTipoDeContacto().addActionListener(this);
+		this.vista.getBtnReporte().addActionListener(this);
 		this.vista.getBtnCerrarAgenda().addActionListener(this);
 		this.agenda = agenda;
 		this.personas_en_tabla = null;
@@ -229,6 +222,11 @@ public class Controlador implements ActionListener
 				this.ventanaTipoDeContacto.getTxtId().setText(tipoDeContacto.getIdTipoDeContacto() + "");
 				this.ventanaTipoDeContacto.getTxtTipoDeContacto().setText(tipoDeContacto.getTipoDeContacto());
 			}
+			
+		} else if (e.getSource() == this.vista.getBtnReporte()) {	
+			System.out.println("Reporte");
+			ReporteAgenda reporte = new ReporteAgenda(agenda.obtenerPersonasReporte());
+			reporte.mostrar();			
 		} else if (e.getSource() == this.vista.getBtnCerrarAgenda()) {
 			this.vista.cerrarAgenda();
 		}
