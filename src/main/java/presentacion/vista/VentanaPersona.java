@@ -96,7 +96,7 @@ public class VentanaPersona extends JFrame {
 		txtNombre.setBounds(133, 67, 164, 20);
 		panel.add(txtNombre);
 		txtNombre.setColumns(10);
-		PromptSupport.setPrompt("*", txtNombre);
+		PromptSupport.setPrompt("* APELLIDO, NOMBRE", txtNombre);
 
 		txtTelefono = new JTextField();
 		txtTelefono.setBounds(133, 107, 164, 20);

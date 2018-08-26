@@ -25,8 +25,7 @@ import presentacion.vista.VentanaPersona;
 import presentacion.vista.VentanaTipoDeContacto;
 import presentacion.vista.Vista;
 
-public class Controlador implements ActionListener
-{
+public class Controlador implements ActionListener {
 	private Vista vista;
 	private List<PersonaDTO> personas_en_tabla;
 	private List<LocalidadDTO> localidadesEnTabla;
@@ -122,7 +121,7 @@ public class Controlador implements ActionListener
 			this.llenarTabla();
 			this.llenarTablaLocalidades();
 			llenarTablaTipoDeContactos();
-		}else if (e.getSource() == this.vista.getBtnEditar()) {
+		} else if (e.getSource() == this.vista.getBtnEditar()) {
 			int[] filas_seleccionadas = this.vista.getTablaPersonas().getSelectedRows();
 			if (filas_seleccionadas.length == 0) {
 				JOptionPane.showMessageDialog(null, "SELECCIONA UN CONTACTO ANTES DE QUERER EDITARLO", "ALERTA",
@@ -224,10 +223,10 @@ public class Controlador implements ActionListener
 				this.ventanaTipoDeContacto.getTxtId().setText(tipoDeContacto.getIdTipoDeContacto() + "");
 				this.ventanaTipoDeContacto.getTxtTipoDeContacto().setText(tipoDeContacto.getTipoDeContacto());
 			}
-			
-		} else if (e.getSource() == this.vista.getBtnReporte()) {	
+
+		} else if (e.getSource() == this.vista.getBtnReporte()) {
 			ReporteAgenda reporte = new ReporteAgenda(obtenerPersonasReporte());
-			reporte.mostrar();			
+			reporte.mostrar();
 		} else if (e.getSource() == this.vista.getBtnCerrarAgenda()) {
 			this.vista.cerrarAgenda();
 		}
@@ -314,13 +313,16 @@ public class Controlador implements ActionListener
 					&& validarMail(this.ventanaPersona.getTxtEmail().getText()) == false) {
 				JOptionPane.showMessageDialog(null, "Ingresa un correo electronico valido", "Email",
 						JOptionPane.WARNING_MESSAGE);
+			} else if (this.ventanaPersona.getTxtNombre().getText().length() != 0
+					&& validarNombre(this.ventanaPersona.getTxtNombre().getText()) == false) {
+				JOptionPane.showMessageDialog(null, "Ingresa un nombre valido. Formato APELLIDO, NOMBRE", "Nombre",
+						JOptionPane.WARNING_MESSAGE);
 			} else {
 				String fechaString = this.ventanaPersona.getTxtFechaDeNacimiento().getText();
 				DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 				Date date = format.parse(fechaString);
 				@SuppressWarnings("deprecation")
 				java.sql.Date sqlDate = new java.sql.Date(date.getYear(), date.getMonth(), date.getDay());
-
 				LocalidadDTO localidad = (LocalidadDTO) this.ventanaPersona.getComboBoxLocalidades().getSelectedItem();
 				TipoDeContactoDTO tipoDeContacto = (TipoDeContactoDTO) this.ventanaPersona.getComboBoxTipoDeContacto()
 						.getSelectedItem();
@@ -373,6 +375,10 @@ public class Controlador implements ActionListener
 			} else if (this.ventanaPersona.getTxtEmail().getText().length() != 0
 					&& validarMail(this.ventanaPersona.getTxtEmail().getText()) == false) {
 				JOptionPane.showMessageDialog(null, "Ingresa un correo electronico valido", "Email",
+						JOptionPane.WARNING_MESSAGE);
+			} else if (this.ventanaPersona.getTxtNombre().getText().length() != 0
+					&& validarNombre(this.ventanaPersona.getTxtNombre().getText()) == false) {
+				JOptionPane.showMessageDialog(null, "Ingresa un nombre valido. Formato APELLIDO, NOMBRE", "Nombre",
 						JOptionPane.WARNING_MESSAGE);
 			} else {
 				String fechaString = this.ventanaPersona.getTxtFechaDeNacimiento().getText();
@@ -430,6 +436,12 @@ public class Controlador implements ActionListener
 		Pattern pattern = Pattern.compile(
 				"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 		Matcher mather = pattern.matcher(mail);
+		return mather.find() == true;
+	}
+	
+	private boolean validarNombre(String nombre) {
+		Pattern pattern = Pattern.compile("[A-Za-z], [A-Za-z]");
+		Matcher mather = pattern.matcher(nombre);
 		return mather.find() == true;
 	}
 
