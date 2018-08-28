@@ -18,6 +18,14 @@
 		<variableExpression><![CDATA[new java.lang.Integer(1)]]></variableExpression>
 		<initialValueExpression><![CDATA[new java.lang.Integer(0)]]></initialValueExpression>
 	</variable>
+	<group name="Main Group">
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
 	<group name="Mail">
 		<groupExpression><![CDATA[$F{splitMailServer}]]></groupExpression>
 		<groupHeader>
@@ -96,7 +104,7 @@
 	<title>
 		<band height="61" splitType="Stretch">
 			<rectangle radius="0">
-				<reportElement x="-10" y="0" width="572" height="61" forecolor="#FF0000" backcolor="#5240B8" uuid="4ea20dd8-5aa5-498b-8129-3b77f956e50d"/>
+				<reportElement x="-10" y="0" width="572" height="61" forecolor="#FF0000" backcolor="#261A5E" uuid="4ea20dd8-5aa5-498b-8129-3b77f956e50d"/>
 				<graphicElement>
 					<pen lineWidth="0.0"/>
 				</graphicElement>
@@ -168,7 +176,7 @@
 		<band height="245" splitType="Stretch">
 			<pieChart>
 				<chart evaluationTime="Report">
-					<reportElement x="80" y="20" width="400" height="200" uuid="5aef698d-9bef-4ad6-855e-6d01f5b402e2"/>
+					<reportElement x="80" y="20" width="400" height="200" uuid="2fcdea63-551f-4995-a2ce-610276e192b6"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
@@ -176,9 +184,8 @@
 				<pieDataset maxCount="10">
 					<keyExpression><![CDATA[$F{splitMailServer}]]></keyExpression>
 					<valueExpression><![CDATA[$V{Mail_COUNT}]]></valueExpression>
-					<labelExpression><![CDATA[$F{splitMailServer}+": "+$V{Mail_COUNT}]]></labelExpression>
 				</pieDataset>
-				<piePlot>
+				<piePlot labelFormat="{0}{2} " legendLabelFormat="{0}">
 					<plot/>
 					<itemLabel/>
 				</piePlot>
