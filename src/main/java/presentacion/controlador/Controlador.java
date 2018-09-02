@@ -2,6 +2,14 @@ package presentacion.controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,6 +28,7 @@ import dto.PersonaReporteDTO;
 import dto.TipoDeContactoDTO;
 import modelo.Agenda;
 import presentacion.reportes.ReporteAgenda;
+import presentacion.vista.VentanaDatosConexionBD;
 import presentacion.vista.VentanaLocalidad;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.VentanaTipoDeContacto;
@@ -48,6 +57,7 @@ public class Controlador implements ActionListener {
 		this.vista.getBtnEditarTipoDeContacto().addActionListener(this);
 		this.vista.getBtnReporte().addActionListener(this);
 		this.vista.getBtnCerrarAgenda().addActionListener(this);
+		this.vista.getBtnConfigurarBaseDeDatos().addActionListener(this);
 		this.agenda = agenda;
 		this.personas_en_tabla = null;
 	}
@@ -121,7 +131,133 @@ public class Controlador implements ActionListener {
 			this.llenarTabla();
 			this.llenarTablaLocalidades();
 			llenarTablaTipoDeContactos();
-		} else if (e.getSource() == this.vista.getBtnEditar()) {
+		} else if (e.getSource() == this.vista.getBtnConfigurarBaseDeDatos()) {
+			// OBTENER USUARIO Y CONTRASEÑA DE UN TXT.
+			String filename = "C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\loginSQL.txt";
+			String usuarioBD = "";
+			String contraseñaBD = "";
+			String ipBD = "";
+			String puertoBD = "";
+			String usuarioBDViejo = "";
+			String contraseñaBDViejo = "";
+			String ipBDViejo = "";
+			String puertoBDViejo = "";
+
+			BufferedReader bufferedReader = null;
+			FileReader fileReader = null;
+			
+			try {
+				// Leer usuarioBD y contraseñaBD para realizar el logueo.
+				fileReader = new FileReader(filename);
+				bufferedReader = new BufferedReader(fileReader);
+
+				usuarioBDViejo = bufferedReader.readLine();
+				contraseñaBDViejo = bufferedReader.readLine();
+				ipBDViejo = bufferedReader.readLine();
+				puertoBDViejo = bufferedReader.readLine();
+				// Borramos el file para poder crearlo y realizar nuevamente la conexion
+				File file = new File(filename);
+				file.delete();
+				if (file.delete()) {
+					System.out.println("TXT borrado.");
+				}
+				usuarioBD = bufferedReader.readLine();
+				contraseñaBD = bufferedReader.readLine();
+				ipBD = bufferedReader.readLine();
+				puertoBD = bufferedReader.readLine();
+				if (usuarioBD == null || usuarioBD.length() == 0 || contraseñaBD == null || contraseñaBD.length() == 0
+						|| ipBD == null || ipBD.length() == 0 || puertoBD == null || puertoBD.length() == 0) {
+					System.out.println("No hay suficientes datos para realizar el logueo.");
+					// Borramos el txt para que la proxima vez pida nuevamente los datos.
+					if (bufferedReader != null)
+						bufferedReader.close();
+					if (fileReader != null)
+						fileReader.close();
+					// Pedimos al usuario que ingrese usuarioBd y contraseñaBD
+					VentanaDatosConexionBD ventanaDatosConexionBD = new VentanaDatosConexionBD(filename);
+					ventanaDatosConexionBD.show();
+					// LEEMOS DE NUEVO EL TXT
+					fileReader = new FileReader(filename);
+					bufferedReader = new BufferedReader(fileReader);
+
+					usuarioBD = bufferedReader.readLine();
+					contraseñaBD = bufferedReader.readLine();
+					ipBD = bufferedReader.readLine();
+					puertoBD = bufferedReader.readLine();
+					System.out.println("Usuario: " + usuarioBD);
+					System.out.println("Contraseña: " + contraseñaBD);
+					System.out.println("IP: " + ipBD);
+					System.out.println("Puerto: " + puertoBD);
+					if (usuarioBD == null || usuarioBD.length() == 0 || contraseñaBD == null || contraseñaBD.length() == 0
+							|| ipBD == null || ipBD.length() == 0 || puertoBD == null || puertoBD.length() == 0) {
+						System.out.println("No hay suficientes datos para realizar el logueo.");
+						// Ingresamos los datos viejos porque puso cancelar
+						FileWriter fw;
+						try {
+							fw = new FileWriter(filename);
+							fw.write(usuarioBDViejo + System.lineSeparator() + contraseñaBDViejo
+									+ System.lineSeparator() + ipBD + System.lineSeparator()
+									+ puertoBD);
+							fw.close();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+					} else {
+						mensajeDeConexion();
+					}
+				} else {
+					mensajeDeConexion();
+				}
+			} catch (IOException e9) {
+				System.out.println("El archivo no esta creado.");
+				try {
+					// Creamos el txt y le pedimos al usuario que ingrese usuario y contraseña.
+					Path path = Paths.get(filename);
+					Files.createDirectories(path.getParent());
+					Files.createFile(path);
+					System.out.println("El archivo txt se ha creado exitosamente.");
+					// Pedimos al usuario que ingrese usuarioBd y contraseñaBD
+					VentanaDatosConexionBD ventanaDatosConexionBD = new VentanaDatosConexionBD(filename);
+					ventanaDatosConexionBD.show();
+					// LEEMOS DE NUEVO EL TXT
+					fileReader = new FileReader(filename);
+					bufferedReader = new BufferedReader(fileReader);
+
+					usuarioBD = bufferedReader.readLine();
+					contraseñaBD = bufferedReader.readLine();
+					ipBD = bufferedReader.readLine();
+					puertoBD = bufferedReader.readLine();
+					System.out.println("Usuario: " + usuarioBD);
+					System.out.println("Contraseña: " + contraseñaBD);
+					System.out.println("IP: " + ipBD);
+					System.out.println("Puerto: " + puertoBD);
+					if (usuarioBD == null || usuarioBD.length() == 0 || contraseñaBD == null || contraseñaBD.length() == 0
+							|| ipBD == null || ipBD.length() == 0 || puertoBD == null || puertoBD.length() == 0) {
+						System.out.println("No hay suficientes datos para realizar el logueo.");
+						// Borramos el txt para que la proxima vez pida nuevamente los datos.
+						File file = new File(filename);
+						file.delete();
+						System.out.println("TXT borrado.");
+					} else {
+						mensajeDeConexion();
+					}
+					
+				} catch (IOException e1) {
+					System.out.println("La siguiente ruta: " + filename + " no existe.");
+				}
+			} finally {
+				try {
+					if (bufferedReader != null)
+						bufferedReader.close();
+					if (fileReader != null)
+						fileReader.close();
+				} catch (IOException ex) {
+					ex.printStackTrace();
+				}
+			}
+			// Volvemos a cargar todos los datos de la base nueva
+			inicializar();
+		}else if (e.getSource() == this.vista.getBtnEditar()) {
 			int[] filas_seleccionadas = this.vista.getTablaPersonas().getSelectedRows();
 			if (filas_seleccionadas.length == 0) {
 				JOptionPane.showMessageDialog(null, "SELECCIONA UN CONTACTO ANTES DE QUERER EDITARLO", "ALERTA",
@@ -284,6 +420,13 @@ public class Controlador implements ActionListener {
 			llenarTablaTipoDeContactos();
 		}
 
+	}
+
+	private void mensajeDeConexion() {
+		System.out.println("LOGUEO EXITOSO.");
+		JOptionPane.showMessageDialog(null, "POR FAVOR, REINICIE LA APLICACION", "ALERTA",
+				JOptionPane.WARNING_MESSAGE);
+		System.exit(0);
 	}
 
 	private Set<PersonaReporteDTO> obtenerPersonasReporte() {

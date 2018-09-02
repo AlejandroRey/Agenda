@@ -3,7 +3,6 @@ package presentacion.vista;
 import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,7 +10,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
@@ -34,13 +32,13 @@ public class Vista {
 	private JButton btnBorrarTipoDeContacto;
 	private JButton btnReporte;
 	private JButton btnCerrarAgenda;
+	private JButton btnConfigurarBaseDeDatos;
 	private DefaultTableModel modelPersonas;
 	private String[] nombreColumnas = {"Nombre y apellido", "Tel�fono", "Correo Electronico", "Fecha de Nacimiento", "Domicilio", "Tipo de Contacto" };
 	private DefaultTableModel modelLocalidades;
 	private String[] nombreColumnasLocalidades = {"Localidad"};
 	private DefaultTableModel modelTipoDeContactos;
 	private String[] nombreDeColumnasTipoDeContactos = {"Tipos de Contactos"};
-	private JTextField txtAgenda;
 	public Vista() {
 		super();
 		initialize();
@@ -132,11 +130,11 @@ public class Vista {
 		panel.add(btnEditarTipoDeContacto);
 		
 		btnCerrarAgenda = new JButton("Cerrar Agenda");
-		btnCerrarAgenda.setBounds(461, 726, 235, 23);
+		btnCerrarAgenda.setBounds(866, 726, 235, 23);
 		panel.add(btnCerrarAgenda);
 		
 		btnReporte = new JButton("Ver Reporte");
-		btnReporte.setBounds(461, 359, 235, 23);
+		btnReporte.setBounds(461, 726, 235, 23);
 		panel.add(btnReporte);
 		
 		JLabel lblAgenda = new JLabel("AGENDA");
@@ -145,7 +143,9 @@ public class Vista {
 		lblAgenda.setBounds(466, 16, 234, 61);
 		frame.getContentPane().add(lblAgenda);
 		
-		
+		btnConfigurarBaseDeDatos = new JButton("Configurar Base de Datos");
+		btnConfigurarBaseDeDatos.setBounds(20, 726, 235, 23);
+		panel.add(btnConfigurarBaseDeDatos);
 	}
 
 	public void show() {
@@ -212,6 +212,10 @@ public class Vista {
 
 	public JButton getBtnCerrarAgenda() {
 		return btnCerrarAgenda;
+	}
+	
+	public JButton getBtnConfigurarBaseDeDatos() {
+		return btnConfigurarBaseDeDatos;
 	}
 	
 	public DefaultTableModel getModelPersonas() {
