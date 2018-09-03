@@ -134,7 +134,7 @@ public class Vista {
 		panel.add(btnCerrarAgenda);
 		
 		btnReporte = new JButton("Ver Reporte");
-		btnReporte.setBounds(461, 726, 235, 23);
+		btnReporte.setBounds(461, 370, 235, 23);
 		panel.add(btnReporte);
 		
 		JLabel lblAgenda = new JLabel("AGENDA");
