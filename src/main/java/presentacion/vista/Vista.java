@@ -106,7 +106,7 @@ public class Vista {
 		panel.add(btnAgregarLocalidad);
 
 		btnEditar = new JButton("Editar Persona");
-		btnEditar.setBounds(461, 325, 235, 23);
+		btnEditar.setBounds(461, 301, 235, 23);
 		panel.add(btnEditar);
 
 		btnBorrar = new JButton("Borrar Persona");
@@ -134,7 +134,7 @@ public class Vista {
 		panel.add(btnCerrarAgenda);
 		
 		btnReporte = new JButton("Ver Reporte");
-		btnReporte.setBounds(461, 370, 235, 23);
+		btnReporte.setBounds(461, 369, 235, 23);
 		panel.add(btnReporte);
 		
 		JLabel lblAgenda = new JLabel("AGENDA");
@@ -144,7 +144,7 @@ public class Vista {
 		frame.getContentPane().add(lblAgenda);
 		
 		btnConfigurarBaseDeDatos = new JButton("Configurar Base de Datos");
-		btnConfigurarBaseDeDatos.setBounds(20, 726, 235, 23);
+		btnConfigurarBaseDeDatos.setBounds(461, 335, 235, 23);
 		panel.add(btnConfigurarBaseDeDatos);
 	}
 

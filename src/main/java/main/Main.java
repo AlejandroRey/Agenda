@@ -15,9 +15,9 @@ public class Main
 	{
         try {
             // Selecciono el Look and Feel HiFiLookAndFeel
-            //UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+            UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
             //UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel"); 
-        	UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
+        	//UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
         	//UIManager.setLookAndFeel("com.jtattoo.plaf.bernstein.BernsteinLookAndFeel");
         	
             // Inicio la Aplicacion
